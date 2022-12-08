@@ -38,8 +38,9 @@ class Model {
 	/// OBJファイルからメッシュ生成
 	/// </summary>
 	/// <param name="modelname">モデル名</param>
+	/// <param name="smoothing">エッジ平滑化フラグ</param>
 	/// <returns>生成されたモデル</returns>
-	static Model* CreateFromOBJ(const std::string& modelname);
+	static Model* CreateFromOBJ(const std::string& modelname, bool smoothing = false);
 
   public: // メンバ関数
 	/// <summary>
@@ -51,7 +52,8 @@ class Model {
 	/// 初期化
 	/// </summary>
 	/// <param name="modelname">モデル名</param>
-	void Initialize(const std::string& modelname);
+	/// <param name="smoothing">エッジ平滑化フラグ</param>
+	void Initialize(const std::string& modelname, bool smoothing);
 
 	/// <summary>
 	/// 描画
