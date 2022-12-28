@@ -9,6 +9,7 @@
 #include "Model.h"
 #include "Camera.h"
 #include "Light.h"
+#include "LightGroup.h"
 
 /// <summary>
 /// 3Dオブジェクト
@@ -94,6 +95,8 @@ private: // 静的メンバ変数
 	static Camera* sCamera_;
 	//ライト
 	static Light* light;
+	
+	static LightGroup* lightGroup;
 
 public: // メンバ関数
 	bool Initialize();
@@ -151,6 +154,12 @@ public:	//アクセッサ
 	/// </summary>
 	/// <param name="light">ライト</param>
 	static void SetLight(Light* light) { Object3d::light = light; }
+
+	/// <summary>
+	/// ライトのセット
+	/// </summary>
+	/// <param name="light">ライト</param>
+	static void SetLightGroup(LightGroup* light) { Object3d::lightGroup = light; }
 
 private: // メンバ変数
 	ComPtr<ID3D12Resource> constBuffB0; // 定数バッファ

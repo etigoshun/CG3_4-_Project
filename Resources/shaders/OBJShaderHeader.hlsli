@@ -1,3 +1,37 @@
+//点光源の数
+static const int POINTLIGHT_NUM = 3;
+
+struct PointLight
+{
+	float3 lightpos;	//ライト座標
+	float3 lightcolor;	//ライトの色(RGB)
+	float3 lightatten;	//ライト距離減衰係数
+	uint active;
+};
+
+// 平行光源の数
+static const int DIRLIGHT_NUM = 3;
+
+struct DirLight
+{
+	float3 lightv;    // ライトへの方向の単位ベクトル
+	float3 lightcolor;    // ライトの色(RGB)
+	uint active;
+};
+
+//スポットライトの数
+static const int SPOTLIGHT_NUM = 3;
+
+struct SpotLight
+{
+	float3 lightv;					//ライトの光線方向の逆ベクトル
+	float3 lightpos;				//ライト座標
+	float3 lightcolor;				//ライトの色(RGB)
+	float3 lightatten;				//ライト距離減衰係数
+	float2 lightfactoranglecos;		//ライト減衰角度のコサイン
+	uint active;
+};
+
 cbuffer cbuff0 : register(b0)
 {
 	matrix viewproj;	//ビュープロジェクション行列
@@ -15,8 +49,10 @@ cbuffer cbuff1 : register(b1)
 
 cbuffer cbuff2 : register(b2)
 {
-	float3 lightv;			//ライトへの方向の単位ベクトル
-	float3 lightcolor;		//ライトの色(RGB)
+	float3 ambientColor;
+	DirLight dirLights[DIRLIGHT_NUM];
+	PointLight pointLights[POINTLIGHT_NUM];
+	SpotLight spotLights[SPOTLIGHT_NUM];
 }
 
 // 頂点シェーダーからピクセルシェーダーへのやり取りに使用する構造体
@@ -27,3 +63,5 @@ struct VSOutput
 	float3 normal : NORMAL;	//法線
 	float2 uv : TEXCOORD; // uv値
 };
+
+
